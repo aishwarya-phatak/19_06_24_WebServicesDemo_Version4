@@ -12,8 +12,6 @@ class CartTableViewCell: UITableViewCell {
     @IBOutlet weak var cartIdLabel: UILabel!
     @IBOutlet weak var cartDateLabel: UILabel!
     @IBOutlet weak var cartCollectionView: UICollectionView!
-    var dummyArray : [Cart] = []
-    var countOfProducts : Int = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,35 +34,30 @@ class CartTableViewCell: UITableViewCell {
         
         self.cartCollectionView.register(uiNib, forCellWithReuseIdentifier: Constants.reuseIdentifierForCollectionViewCell)
     }
-    
 }
 
 extension CartTableViewCell : UICollectionViewDataSource{
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        for eachCart in dummyArray{
-            countOfProducts = eachCart.products.count
-        }
-        return countOfProducts
+        return Constants.carts[collectionView.tag].products.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let productCollectionViewCell = self.cartCollectionView.dequeueReusableCell(withReuseIdentifier: Constants.reuseIdentifierForCollectionViewCell, for: indexPath) as! ProductCollectionViewCollectionViewCell
-        for eachCart in dummyArray{
-            productCollectionViewCell.productIdLabel.text = String(eachCart.products[indexPath.item].productId)
-            productCollectionViewCell.productQuantityLabel.text = String(eachCart.products[indexPath.item].quantity)
-        }
-       
+        
+        productCollectionViewCell.productIdLabel.text = String(Constants.carts[collectionView.tag].products[indexPath.item].productId)
+        productCollectionViewCell.productQuantityLabel.text = String(Constants.carts[collectionView.tag].products[indexPath.item].quantity)
+        
         return productCollectionViewCell
     }
 }
-
 
 extension CartTableViewCell : UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let collectionViewWidth = self.cartCollectionView.frame.width
         let collectionViewHeight = self.cartCollectionView.frame.height
         
-        return CGSize(width: (collectionViewWidth/3.0), height: (collectionViewHeight - 20.0))
+        return CGSize(width: (collectionViewWidth/3.0), height: (collectionViewHeight-5.0))
     }
 }
 

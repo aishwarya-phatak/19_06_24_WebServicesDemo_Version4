@@ -8,13 +8,13 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var cartsTableView: UITableView!
     var url : URL?
     var urlRequest : URLRequest?
     var urlSession : URLSession?
     var jsonDecoder : JSONDecoder?
-    var carts : [Cart] = []
+//    var carts : [Cart] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,10 +45,10 @@ class ViewController: UIViewController {
         let dataTask = urlSession?.dataTask(with: urlRequest!, completionHandler: { data, response, error in
             
             self.jsonDecoder = JSONDecoder()
-            self.carts = try! self.jsonDecoder!.decode([Cart].self, from: data!)
-            print(self.carts)
+            Constants.carts = try! self.jsonDecoder!.decode([Cart].self, from: data!)
+            print(Constants.carts)
             
-            for eachCart in self.carts{
+            for eachCart in Constants.carts{
                 for eachProduct in eachCart.products{
                     print(eachProduct.productId)
                     print(eachProduct.quantity)
@@ -66,22 +66,22 @@ class ViewController: UIViewController {
 
 extension ViewController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.carts.count
+        return Constants.carts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cartTableViewCell = self.cartsTableView.dequeueReusableCell(withIdentifier: Constants.reuseIdentifierForTableViewCell, for: indexPath) as! CartTableViewCell
-        cartTableViewCell.cartIdLabel.text = String(carts[indexPath.row].id)
-        cartTableViewCell.cartDateLabel.text = carts[indexPath.row].date
-        
-        cartTableViewCell.dummyArray = carts
+        cartTableViewCell.cartIdLabel.text = String(Constants.carts[indexPath.row].id)
+        cartTableViewCell.cartDateLabel.text = Constants.carts[indexPath.row].date
+        cartTableViewCell.cartCollectionView.tag = indexPath.row
+        cartTableViewCell.cartCollectionView.reloadData()
         
         return cartTableViewCell
     }
 }
 
-
 extension ViewController : UITableViewDelegate{
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 196.0
     }

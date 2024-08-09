@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="380" height="195"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="eEX-AY-fSS">
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" indicatorStyle="black" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="eEX-AY-fSS">
                         <rect key="frame" x="20" y="70" width="340" height="100"/>
                         <color key="backgroundColor" red="0.86022534009999996" green="0.78039215689999997" blue="0.74509803919999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
