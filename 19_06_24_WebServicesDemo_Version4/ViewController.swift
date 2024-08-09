@@ -71,8 +71,19 @@ extension ViewController : UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cartTableViewCell = self.cartsTableView.dequeueReusableCell(withIdentifier: Constants.reuseIdentifierForTableViewCell, for: indexPath) as! CartTableViewCell
+        
         cartTableViewCell.cartIdLabel.text = String(Constants.carts[indexPath.row].id)
+        cartTableViewCell.cartIdLabel.layer.cornerRadius = 6.0
+        cartTableViewCell.cartIdLabel.layer.borderColor = CGColor(red: 100.0, green: 0.0, blue: 100.0, alpha: 0.5)
+        cartTableViewCell.cartIdLabel.layer.borderWidth = 10.0
+        
+        
         cartTableViewCell.cartDateLabel.text = Constants.carts[indexPath.row].date
+        cartTableViewCell.cartDateLabel.layer.cornerRadius = 6.0
+        cartTableViewCell.cartDateLabel.layer.borderColor = CGColor(red: 100.0, green: 0.0, blue: 100.0, alpha: 0.5)
+        cartTableViewCell.cartDateLabel.layer.borderWidth = 10.0
+        
+        
         cartTableViewCell.cartCollectionView.tag = indexPath.row
         cartTableViewCell.cartCollectionView.reloadData()
         

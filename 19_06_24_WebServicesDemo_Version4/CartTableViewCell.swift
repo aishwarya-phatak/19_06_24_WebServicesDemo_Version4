@@ -45,6 +45,12 @@ extension CartTableViewCell : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let productCollectionViewCell = self.cartCollectionView.dequeueReusableCell(withReuseIdentifier: Constants.reuseIdentifierForCollectionViewCell, for: indexPath) as! ProductCollectionViewCollectionViewCell
         
+        productCollectionViewCell.layer.backgroundColor = CGColor(red: 0.0, green: 0.0, blue: 100.0, alpha: 0.3)
+        productCollectionViewCell.layer.borderColor = CGColor(red: 50.0, green: 0.0, blue: 0.0, alpha: 0.5)
+        productCollectionViewCell.layer.borderWidth = 6.0
+        productCollectionViewCell.layer.cornerRadius = 10.0
+        
+        
         productCollectionViewCell.productIdLabel.text = String(Constants.carts[collectionView.tag].products[indexPath.item].productId)
         productCollectionViewCell.productQuantityLabel.text = String(Constants.carts[collectionView.tag].products[indexPath.item].quantity)
         
